@@ -1,6 +1,6 @@
 # Simulated Annealing Curve Fitting
 
-This project demonstrates the use of Simulated Annealing (SA) for curve fitting. It provides a Python implementation of the SA optimization algorithm and includes examples of fitting various types of custom functions to sample data.
+This project demonstrates the use of Simulated Annealing (SA) for curve fitting. It provides a Python implementation of the SA optimization algorithm and includes examples of fitting various types of custom functions.
 
 ## Usage
 
