@@ -8,8 +8,8 @@ class SA:
         self.fit_function = fit_function
         self.num_parameters = num_parameters
         self.parameters = [1.5] * num_parameters  # Initialize parameters with default values
-        self.thermalization_cycles = 20
-        self.alfa = 0.8
+        self.thermalization_cycles = 50
+        self.alfa = 0.2
         self.delta_tilde = []
         self.delta = []
 
@@ -30,6 +30,13 @@ class SA:
         for i in range(n):
             fit_data[i] = self.fit_function(i, *func_params)
         return fit_data
+
+    def report_progress(self, j, i, params, best_eval):
+        # Create a string representation of all parameters
+        params_str = ', '.join(str(param) for param in params)
+
+        # Report progress
+        print(f'>{j}-{i}: Parameters: {params_str}, Evaluation: {best_eval}')
 
     def simulated_annealing(self, data, n_iterations, step_size):
         # Starting point
@@ -61,8 +68,7 @@ class SA:
                     params, best_eval = candidate_params, candidate_eval
                     fit_data = self.fit(len(data), *params)
                     # Report progress
-                    '''print('>%d: window-(%d-%d) Parameters: %s Evaluation: %.5f\n' % (
-                        j, params[0], params[2], params[3:], best_eval))'''
+                    self.report_progress(j, i, params, best_eval)
                 else:
                     # Difference between candidate and current point evaluation
                     diff = candidate_eval - curr_eval
@@ -74,8 +80,8 @@ class SA:
                         curr_params, curr_eval = candidate_params, candidate_eval
                         fit_data = self.fit(len(data), *curr_params)
                         scores.append(curr_eval)
-                        '''print('>%d: window-(%d-%d) Parameters: %s Evaluation: %.5f\n' % (
-                            j, curr_params, curr_eval))'''
+                        # Report progress
+                        self.report_progress(j, i, curr_params, curr_eval)
             n_iterations += 10
 
         return params, best_eval, scores, fit_data
