@@ -24,7 +24,7 @@ if __name__ == "__main__":
     y_data = 2 * np.sin(1.5 * x_data + 0.5) + np.random.normal(0, 0.2, len(x_data))
 
     # Initial guess for the parameters
-    initial_parameters = [1.0, 1.0, 0.0]  # A, B, and C
+    initial_parameters = [1.0, 1.0, 1.0]  # A, B, and C
 
     # Set up SA parameters
     n_iterations = 100
